@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public enum SQLConn {
+public enum BCConn {
 	INSTANCE;
-	//private static final String url = "jdbc:sqlserver://192.168.0.26; databaseName=pos;useUnicode=true;characterEncoding=utf-8";
-	private static final String url = "jdbc:sqlserver://192.168.0.182; databaseName=pos;useUnicode=true;characterEncoding=utf-8";
+	private static final String url = "jdbc:sqlserver://192.168.0.7; databaseName=bcnp;useUnicode=true;characterEncoding=utf-8";
+	//private static final String url = "jdbc:mysql://192.168.0.89:3306/qdb?useUnicode=true&characterEncoding=utf-8";
 	private static final String user = "sa";
 	private static final String pwd = "[ibdkifu";
 
@@ -23,7 +23,16 @@ public enum SQLConn {
 		}
 	} 
 	
-
+	public Statement getStatement() throws SQLException {
+		Statement stmt = null;
+		// get connection
+		System.out.println(url);
+		conn = DriverManager.getConnection(url, user, pwd );
+		stmt = conn.createStatement();
+		
+		return stmt;
+	}
+	
 	public Statement getSqlStatement() throws SQLException {
 		Statement stmt = null;
 		// get connection
@@ -34,10 +43,9 @@ public enum SQLConn {
 		return stmt;
 	}
 	
-	public Statement getSqlStatement(String urlpassing) throws SQLException {
+	public Statement getSqlStatement(String svName,String urlpassing) throws SQLException {
 		Statement stmt = null;
-		//urlpassing = "jdbc:sqlserver://192.168.0.26; databaseName="+urlpassing+";useUnicode=true;characterEncoding=utf-8";
-		urlpassing = "jdbc:sqlserver://192.168.0.182; databaseName="+urlpassing+";useUnicode=true;characterEncoding=utf-8";
+		urlpassing = "jdbc:sqlserver://"+svName+"; databaseName="+urlpassing+";useUnicode=true;characterEncoding=utf-8";
 		 System.out.println(urlpassing);
 		// get connection
 		conn = DriverManager.getConnection(urlpassing, user, pwd );
@@ -78,4 +86,5 @@ public enum SQLConn {
 					e.printStackTrace();
 				}
 			}
+
 }

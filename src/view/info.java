@@ -11,21 +11,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import model.versionInfo;;
 
+@SuppressWarnings("unused")
 @Path(value="/info")
 public class info {
-	@Path("/getversion") 
+	@Path("/version") 
 	@GET
-//	@Consumes( {MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
 
 	public versionInfo  ver() throws IOException {
-		
 
-		
 		versionInfo ver= new versionInfo();
 		ver.setVersionId("25/02/2016 - AR Module");
 		return ver;
 
-}
+	}
 
 }
